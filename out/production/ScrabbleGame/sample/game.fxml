@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<SplitPane id="splitPane" dividerPositions="0.8567839195979899" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="1000.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GameController">
+  <items>
+    <AnchorPane fx:id="top" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <Button layoutX="902.0" layoutY="14.0" mnemonicParsing="false" onAction="#close" text="Zakończ Gre" />
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#koniecTury" text="Koniec tury" />
+            <Button fx:id="letter" layoutX="121.0" layoutY="14.0" onDragDetected="#handleDragDetection" text="aaa" />
+            <Button fx:id="letter1" layoutX="164.0" layoutY="14.0" onDragDetected="#handleDragDetection1" text="aaa" />
+            <Button fx:id="letter2" layoutX="208.0" layoutY="14.0" onDragDetected="#handleDragDetection2" text="aaa" />
+            <Button fx:id="letter3" layoutX="251.0" layoutY="14.0" onDragDetected="#handleDragDetection3" text="aaa" />
+            <Button fx:id="letter4" layoutX="293.0" layoutY="14.0" onDragDetected="#handleDragDetection4" text="aaa" />
+            <Button fx:id="letter5" layoutX="336.0" layoutY="14.0" onDragDetected="#handleDragDetection5" text="aaa" />
+            <Button fx:id="letter6" layoutX="380.0" layoutY="14.0" onDragDetected="#handleDragDetection6" text="aaa" />
+            <Label layoutX="14.0" layoutY="47.0" text="Label" fx:id="player1_name"/>
+            <Label layoutX="52.0" layoutY="47.0" text="Label" fx:id="player1_score"/>
+            <Label layoutX="14.0" layoutY="71.0" text="Label" fx:id="player2_name"/>
+            <Label layoutX="52.0" layoutY="71.0" text="Label" fx:id="player2_score"/>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
