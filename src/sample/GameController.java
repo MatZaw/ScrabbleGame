@@ -296,26 +296,27 @@ public class GameController  implements Initializable {
 
     private void updateBoard(){
 
-        String letter;
-        String bonus;
-        int X = 0, Y = 0;
+        String letter = "";
+        String bonus = "";
 
+        int X = 0, Y = 0;
+        int i = 0;
         for(Node e : top.getChildren()){
 
-            //TextField n = ;
             if(e instanceof TextField){
-                 letter = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getLetter().getLetter();
-                 bonus = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getBonus();
+                if((Y+1) == 15){
+                    X++;
+                    Y=0;
+                }else Y++;
+
+                System.out.println(i++ + "/" + (top.getChildren().size()-1));
+                letter = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getLetter().getLetter();
+                bonus = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getBonus();
 
                 if(letter == ""){
                     ((TextField) e).setText(bonus);
                 }else ((TextField) e).setText(letter);
 
-                if(Y < 15){
-                    Y++;
-                }else{
-                    X++; Y = 0;
-                }
 
             }
         }
@@ -327,15 +328,12 @@ public class GameController  implements Initializable {
         Player lastPlayer = game.getOngoingRound().getActivePlayer();
         if(lastPlayer == game.getPlayerA()){
 
-          //  updateBoard();
+            updateBoard();
 
             game.endOfRound(); // koniec rundy
 
             game.newRound(game.getPlayerB()); // start nowej rundy
 
-
-
-            System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());
             player2_score.setText(String.valueOf(game.getOngoingRound().getActivePlayer().getCurrentPoints())); // Aktualizacja punktacji
             // Reset listy z indeksami
             currentIndexes.removeAll(currentIndexes);
@@ -352,7 +350,7 @@ public class GameController  implements Initializable {
             //-----
 
         }else{
-            //updateBoard();
+            updateBoard();
             game.endOfRound(); // koniec rundy
             game.newRound(game.getPlayerA()); // start nowej rundy
             System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());

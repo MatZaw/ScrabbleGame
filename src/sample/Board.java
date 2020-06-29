@@ -8,6 +8,7 @@ public class Board {
         for(int i = 0; i < 15; i++){
             for(int j = 0; j < 15; j++){
                 currentBoard[i][j] = new BoardField();
+                currentBoard[i][j].setLetter(new LetterCube("", 0));
             }
         }
         currentBoard[0][0].setBonus("3W");
