@@ -27,7 +27,7 @@ public class GameController  implements Initializable {
 
     public Label player1_name, player1_score, player2_name, player2_score;
 
-    public GameController() { }
+    public GameController() {game = new Game("Gracz 1:", "Gracz 2:"); game.newRound(game.getPlayerA());}
 
     // ustawianie string literki do spuszczenia w pole
     @FXML
@@ -124,14 +124,15 @@ public class GameController  implements Initializable {
         for(int i=1;i<8;i++) currentIndexes.add(String.valueOf(i));
 
         table = new TextField[size][size];  // tablica z polami planszy
-
-        game = new Game("Gracz 1:", "Gracz 2:");
+        // START GRY
+      //  game = new Game("Gracz 1:", "Gracz 2:");
         player1_name.setText(game.getPlayerA().getName());
         player2_name.setText(game.getPlayerB().getName());
+
         player1_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
         player2_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
 
-        game.newRound(game.getPlayerA());
+
 
         setLetters();
 
@@ -293,14 +294,47 @@ public class GameController  implements Initializable {
         letter6.setText(game.getPlayerA().getPlayerCubes().get(6).getLetter());
     }
 
+    private void updateBoard(){
+
+        String letter;
+        String bonus;
+        int X = 0, Y = 0;
+
+        for(Node e : top.getChildren()){
+
+            //TextField n = ;
+            if(e instanceof TextField){
+                 letter = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getLetter().getLetter();
+                 bonus = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getBonus();
+
+                if(letter == ""){
+                    ((TextField) e).setText(bonus);
+                }else ((TextField) e).setText(letter);
+
+                if(Y < 15){
+                    Y++;
+                }else{
+                    X++; Y = 0;
+                }
+
+            }
+        }
+
+    }
+
     // Obsluga tur:
     public void koniecTury(){
         Player lastPlayer = game.getOngoingRound().getActivePlayer();
         if(lastPlayer == game.getPlayerA()){
 
+          //  updateBoard();
+
             game.endOfRound(); // koniec rundy
 
             game.newRound(game.getPlayerB()); // start nowej rundy
+
+
+
             System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());
             player2_score.setText(String.valueOf(game.getOngoingRound().getActivePlayer().getCurrentPoints())); // Aktualizacja punktacji
             // Reset listy z indeksami
@@ -318,6 +352,7 @@ public class GameController  implements Initializable {
             //-----
 
         }else{
+            //updateBoard();
             game.endOfRound(); // koniec rundy
             game.newRound(game.getPlayerA()); // start nowej rundy
             System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());
