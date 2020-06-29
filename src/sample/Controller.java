@@ -28,7 +28,7 @@ public class Controller{
         System.out.println("Nowa gra");
         Stage window = (Stage) newGame.getScene().getWindow();
         Parent root2 = FXMLLoader.load(getClass().getResource("game.fxml"));
-        window.setScene(new Scene(root2, 1000, 600));
+        window.setScene(new Scene(root2, 1000, 650));
     }
 
     // Zamkniecie gry:

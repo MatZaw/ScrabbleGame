@@ -20,9 +20,9 @@
             <Button fx:id="letter5" layoutX="336.0" layoutY="14.0" onDragDetected="#handleDragDetection5" text="aaa" />
             <Button fx:id="letter6" layoutX="380.0" layoutY="14.0" onDragDetected="#handleDragDetection6" text="aaa" />
             <Label layoutX="14.0" layoutY="47.0" text="Label" fx:id="player1_name"/>
-            <Label layoutX="52.0" layoutY="47.0" text="Label" fx:id="player1_score"/>
+            <Label layoutX="82.0" layoutY="47.0" text="Label" fx:id="player1_score"/>
             <Label layoutX="14.0" layoutY="71.0" text="Label" fx:id="player2_name"/>
-            <Label layoutX="52.0" layoutY="71.0" text="Label" fx:id="player2_score"/>
+            <Label layoutX="82.0" layoutY="71.0" text="Label" fx:id="player2_score"/>
          </children></AnchorPane>
   </items>
 </SplitPane>

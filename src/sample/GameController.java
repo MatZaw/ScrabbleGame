@@ -24,8 +24,8 @@ public class GameController  implements Initializable {
     public Button letter, letter1,letter2,letter3,letter4,letter5,letter6; // litery gracza
     ArrayList<String> currentIndexes;
     Game game;
-    @FXML
-    Label player1_name, player1_score, player2_name, player2_score;
+
+    public Label player1_name, player1_score, player2_name, player2_score;
 
     public GameController() { }
 
@@ -125,21 +125,15 @@ public class GameController  implements Initializable {
 
         table = new TextField[size][size];  // tablica z polami planszy
 
-        game = new Game("Gracz 1", "Gracz 2:");
+        game = new Game("Gracz 1:", "Gracz 2:");
         player1_name.setText(game.getPlayerA().getName());
         player2_name.setText(game.getPlayerB().getName());
-        player1_score.setText("");
-        player2_score.setText("");
+        player1_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
+        player2_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
 
         game.newRound(game.getPlayerA());
 
-        letter.setText(game.getPlayerA().getPlayerCubes().get(0).getLetter());
-        letter1.setText(game.getPlayerA().getPlayerCubes().get(1).getLetter());
-        letter2.setText(game.getPlayerA().getPlayerCubes().get(2).getLetter());
-        letter3.setText(game.getPlayerA().getPlayerCubes().get(3).getLetter());
-        letter4.setText(game.getPlayerA().getPlayerCubes().get(4).getLetter());
-        letter5.setText(game.getPlayerA().getPlayerCubes().get(5).getLetter());
-        letter6.setText(game.getPlayerA().getPlayerCubes().get(6).getLetter());
+        setLetters();
 
         for(int i=0;i<size;i++){
             for(int j=0;j<size;j++){
@@ -289,6 +283,16 @@ public class GameController  implements Initializable {
         //-------------------------------------------
     }
 
+    private void setLetters() {
+        letter.setText(game.getPlayerA().getPlayerCubes().get(0).getLetter());
+        letter1.setText(game.getPlayerA().getPlayerCubes().get(1).getLetter());
+        letter2.setText(game.getPlayerA().getPlayerCubes().get(2).getLetter());
+        letter3.setText(game.getPlayerA().getPlayerCubes().get(3).getLetter());
+        letter4.setText(game.getPlayerA().getPlayerCubes().get(4).getLetter());
+        letter5.setText(game.getPlayerA().getPlayerCubes().get(5).getLetter());
+        letter6.setText(game.getPlayerA().getPlayerCubes().get(6).getLetter());
+    }
+
     // Obsluga tur:
     public void koniecTury(){
         Player lastPlayer = game.getOngoingRound().getActivePlayer();
@@ -321,13 +325,7 @@ public class GameController  implements Initializable {
             for(int i=1;i<8;i++) currentIndexes.add(String.valueOf(i));
 
             // Zmiana liter:
-            letter.setText(game.getPlayerA().getPlayerCubes().get(0).getLetter());
-            letter1.setText(game.getPlayerA().getPlayerCubes().get(1).getLetter());
-            letter2.setText(game.getPlayerA().getPlayerCubes().get(2).getLetter());
-            letter3.setText(game.getPlayerA().getPlayerCubes().get(3).getLetter());
-            letter4.setText(game.getPlayerA().getPlayerCubes().get(4).getLetter());
-            letter5.setText(game.getPlayerA().getPlayerCubes().get(5).getLetter());
-            letter6.setText(game.getPlayerA().getPlayerCubes().get(6).getLetter());
+            setLetters();
             //-----
 
         }
