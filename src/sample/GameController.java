@@ -27,7 +27,7 @@ public class GameController  implements Initializable {
 
     public Label player1_name, player1_score, player2_name, player2_score;
 
-    public GameController() {game = new Game("Gracz 1:", "Gracz 2:"); game.newRound(game.getPlayerA());}
+    public GameController() {}
 
     // ustawianie string literki do spuszczenia w pole
     @FXML
@@ -125,14 +125,15 @@ public class GameController  implements Initializable {
 
         table = new TextField[size][size];  // tablica z polami planszy
         // START GRY
-      //  game = new Game("Gracz 1:", "Gracz 2:");
+        game = new Game("Gracz 1:", "Gracz 2:");
+
         player1_name.setText(game.getPlayerA().getName());
         player2_name.setText(game.getPlayerB().getName());
 
+        game.newRound(game.getPlayerA());
+
         player1_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
-        player2_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
-
-
+        player2_score.setText(String.valueOf(game.getPlayerB().getCurrentPoints()));
 
         setLetters();
 
@@ -152,6 +153,7 @@ public class GameController  implements Initializable {
                 int finalJ1 = j;
 
                 table[i][j].setOnDragDropped(e->{
+
                     // Odebranie Stringa z litera (np.: s = "A,1" tj. "Litera,Indeks")
                     String s = handleTextDrop(e);
                     String[] split = s.split(",");
@@ -159,14 +161,18 @@ public class GameController  implements Initializable {
                     // Sprawdzenie czy pole na pewno jest dostepne?
                     if(game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[finalI1][finalJ1].isAvailable()){
                         table[finalI1][finalJ1].setText(split[0]);
-                        game.getOngoingRound().putALetterOnBoard(currentIndexes.indexOf(split[1]), new BoardIndex(finalI1, finalJ1));
+                        game.getOngoingRound().putALetterOnBoard(currentIndexes.indexOf(split[1]), new BoardIndex(7, 7));
 
                         //jesli dostepne to usuwam indeks litery z listy dostepnych liter
                         System.out.println("Przed: " + currentIndexes.toString());
                         currentIndexes.remove(currentIndexes.indexOf(split[1]));
                         System.out.println("Po: " + currentIndexes.toString());
 
+                        updateBoard();
+
                     }else{
+
+                        updateBoard();
 
                         // Przywrocenie widocznosci przycisku
                         switch(split[1]){
@@ -299,21 +305,21 @@ public class GameController  implements Initializable {
         String letter = "";
         String bonus = "";
 
-        int X = 0, Y = 0;
-        int i = 0;
+        int x = 0, y = 0;
+
         for(Node e : top.getChildren()){
 
             if(e instanceof TextField){
-                if(Y > 14){Y=0; X = X+1;}
-                System.out.println(i++ + "/" + (top.getChildren().size()-1) + " ["+X+"]["+Y+"]");
-                letter = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getLetter().getLetter();
-                bonus = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getBonus();
+                if(y > 14){y=0; x++;}
+              //  System.out.println(i++ + "/" + (top.getChildren().size()-1) + " ["+X+"]["+Y+"]");
+                letter = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[x][y].getLetter().getLetter();
+                bonus = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[x][y].getBonus();
 
                 if(letter == ""){
                     ((TextField) e).setText(bonus);
                 }else ((TextField) e).setText(letter);
 
-                Y++;
+                y++;
             }
         }
 
@@ -329,7 +335,7 @@ public class GameController  implements Initializable {
             game.endOfRound(); // koniec rundy
 
             game.newRound(game.getPlayerB()); // start nowej rundy
-
+            System.out.println(game.getOngoingRound().getActivePlayer().name + game.getOngoingRound().getActivePlayer().getCurrentPoints());;
             player2_score.setText(String.valueOf(game.getOngoingRound().getActivePlayer().getCurrentPoints())); // Aktualizacja punktacji
             // Reset listy z indeksami
             currentIndexes.removeAll(currentIndexes);
@@ -347,9 +353,10 @@ public class GameController  implements Initializable {
 
         }else{
             updateBoard();
+
             game.endOfRound(); // koniec rundy
             game.newRound(game.getPlayerA()); // start nowej rundy
-            System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());
+            System.out.println(game.getOngoingRound().getActivePlayer().name + game.getOngoingRound().getActivePlayer().getCurrentPoints());
             player1_score.setText(String.valueOf(game.getOngoingRound().getActivePlayer().getCurrentPoints())); // Aktualizacja punktacji
             // Reset listy z indeksami
             currentIndexes.removeAll(currentIndexes);

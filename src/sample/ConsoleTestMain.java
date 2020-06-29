@@ -1,4 +1,7 @@
 package sample;
+
+import java.util.Scanner;
+
 public class ConsoleTestMain {
     public static void main(String[] args){
         Game game = new Game("playerA", "playerB");
@@ -41,17 +44,30 @@ public class ConsoleTestMain {
 
         game.newRound(game.getPlayerA());
 
-        BoardIndex boardIndex = new BoardIndex(7, 7);
-        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
-        boardIndex = new BoardIndex(7, 8);
-        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
-        boardIndex = new BoardIndex(7, 9);
-        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
-        boardIndex = new BoardIndex(7, 10);
-        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
-        boardIndex = new BoardIndex(7, 11);
-        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
+
+        String str = "";
+        Scanner s = new Scanner(System.in);
+        int n = s.nextInt();
+        for(int i = 0; i < n; i++){
+            str = s.next();
+            game.getOngoingRound().putALetterOnBoard(game.getPlayerA().getPlayerCubes().indexOf(str), new BoardIndex(7, i + i));
+        }
         game.endOfRound();
+
+//        BoardIndex boardIndex = new BoardIndex(7, 7);
+//        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
+//        boardIndex = new BoardIndex(7, 8);
+//        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
+//        boardIndex = new BoardIndex(7, 9);
+//        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
+//        boardIndex = new BoardIndex(7, 10);
+//        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
+//        boardIndex = new BoardIndex(7, 11);
+//        game.getOngoingRound().putALetterOnBoard(0, boardIndex);
+//        game.endOfRound();
+
+
+        game.newRound(game.getPlayerB());
 
         for(int i = 0; i < 15; i++){
             System.out.println();
