@@ -304,12 +304,8 @@ public class GameController  implements Initializable {
         for(Node e : top.getChildren()){
 
             if(e instanceof TextField){
-                if((Y+1) == 15){
-                    X++;
-                    Y=0;
-                }else Y++;
-
-                System.out.println(i++ + "/" + (top.getChildren().size()-1));
+                if(Y > 14){Y=0; X = X+1;}
+                System.out.println(i++ + "/" + (top.getChildren().size()-1) + " ["+X+"]["+Y+"]");
                 letter = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getLetter().getLetter();
                 bonus = game.getOngoingRound().getTemporaryBoard().getCurrentBoard()[X][Y].getBonus();
 
@@ -317,7 +313,7 @@ public class GameController  implements Initializable {
                     ((TextField) e).setText(bonus);
                 }else ((TextField) e).setText(letter);
 
-
+                Y++;
             }
         }
 
