@@ -299,9 +299,10 @@ public class GameController  implements Initializable {
         if(lastPlayer == game.getPlayerA()){
 
             game.endOfRound(); // koniec rundy
-            player1_score.setText(String.valueOf(game.getPlayerA().getCurrentPoints()));
-            game.newRound(game.getPlayerB()); // start nowej rundy
 
+            game.newRound(game.getPlayerB()); // start nowej rundy
+            System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());
+            player2_score.setText(String.valueOf(game.getOngoingRound().getActivePlayer().getCurrentPoints())); // Aktualizacja punktacji
             // Reset listy z indeksami
             currentIndexes.removeAll(currentIndexes);
             for(int i=1;i<8;i++) currentIndexes.add(String.valueOf(i));
@@ -319,7 +320,8 @@ public class GameController  implements Initializable {
         }else{
             game.endOfRound(); // koniec rundy
             game.newRound(game.getPlayerA()); // start nowej rundy
-
+            System.out.println(game.getOngoingRound().getActivePlayer().getCurrentPoints());
+            player1_score.setText(String.valueOf(game.getOngoingRound().getActivePlayer().getCurrentPoints())); // Aktualizacja punktacji
             // Reset listy z indeksami
             currentIndexes.removeAll(currentIndexes);
             for(int i=1;i<8;i++) currentIndexes.add(String.valueOf(i));
